@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>WeatherApp</title>
+  <link rel="stylesheet" href="{% static 'weather/index.css' %}" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="url">Home</a></li>
+      <li><a href="url">Sign Up</a></li>
+      <li><a href="url">Login</a></li>
+    </ul>
+  </nav>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="search-box">
+      {{ form.name }}
+      <button type="submit">Add Weather</button>
+    </div>
+  </form>
+  {% for city_weather in weather_report %}
+  <div class="container">
+    {% load static %}
+    <img src="http://openweathermap.org/img/w/{{city_weather.logo}}.png" alt="weather photo" />
+    <span class="detail">
+      <span class="city">{{ city_weather.city_name }}</span>
+      <div class="temperature">
+        {{ city_weather.temperature }}
+      </div>
+      <div class="description">
+        {{ city_weather.description }}
+      </div>
+    </span>
+  </div>
+  {% endfor %}
+</body>
+
+</html>
